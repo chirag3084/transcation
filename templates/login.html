@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+
+  </style>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+  }
+
+  #box {
+    width: 200px;
+    background-color: blue;
+    margin-left: 600px;
+  }
+</style>
+
+<body>
+  <div id="box">
+    <div id="form">
+      <form method="POST">
+        {% csrf_token %}
+        <label for="login" style="padding-left: 50px;color:bisque;" id="login">Login</label><br><br>
+
+        {% for message in messages %}
+        <h3> {{message}}</h3>
+        {% endfor %}
+        <!-- <label for="username" style="color: white;" class="data">username<br></label>
+        <input type="text" name="username" required><br> -->
+        <label for="username" style="color: white;" class="data">Username<br></label>
+        <input type="text" name="username" required><br>
+        <label style="color: white;" for="password" class="data">Password</label><br>
+        <input type="password" name="password" required>
+        <h6 style="padding-left:90px;"><a href="{% url 'password_reset' %}"
+            style="color: bisque;text-decoration: dashed;">Forget password</a>
+        </h6><br>
+        <div id="btn" style="padding-left: 35px;padding-bottom:10px">
+          <button style="background-color: blueviolet; font-size:large; border-radius: 2px; text-align: center;"
+            id="btn1" type="submit" style="text-decoration: dashed;">Submit</button>
+          <h6 style="color: bisque;padding-left: 50px;padding-top: 6px;">New user?<a
+              style="color:white;padding-left: 2px;text-decoration: dashed;"
+              href="{% url 'home:register' %}">register</a></h6>
+        </div>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'login.css' %}">
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
