@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -150,13 +150,17 @@ LOGIN_REDIRECT_URL = "dashboard.html/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build" "staticfiles")
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build" "staticfiles")
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # Find templates in the same folder as settings.py.
 
 TEMPLATE_DIRS = (os.path.join(SETTINGS_PATH, "templates"),)
+
 json_file_path = os.path.join(BASE_DIR, "core", "d.json")
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
