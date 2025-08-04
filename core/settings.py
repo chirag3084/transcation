@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [".render.com", "home.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
 
 LOGIN_URL = "login"
 
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     "home",
     "core",
-    "rest_framework",   
+    "rest_framework",
 ]
 INSTALLED_APPS += EXTERNAL_APPS
 MIDDLEWARE = [
@@ -100,7 +101,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("DB_NAME"),
         "USER": os.environ.get("DB_USER"),
-        "PASSWORD":os.environ.get("DB_PASSWORD"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
         "HOST": os.environ.get("DB_HOST"),
         "PORT": os.environ.get("DB_PORT"),
     }
@@ -152,7 +153,7 @@ LOGIN_REDIRECT_URL = "dashboard.html/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build" "staticfiles")
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # Find templates in the same folder as settings.py.
@@ -161,9 +162,9 @@ TEMPLATE_DIRS = (os.path.join(SETTINGS_PATH, "templates"),)
 
 json_file_path = os.path.join(BASE_DIR, "core", "d.json")
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'rakesh12233rathod@gmail.com'
-EMAIL_HOST_PASSWORD = 'qnmh klkh vwiz rnqg'
+EMAIL_HOST_USER = "rakesh12233rathod@gmail.com"
+EMAIL_HOST_PASSWORD = "qnmh klkh vwiz rnqg"
