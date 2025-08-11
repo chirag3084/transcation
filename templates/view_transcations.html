@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>view_transcation</title>
+  <style>
+    
+    #d {
+      margin-left: 20px;
+    }
+    #k{
+      margin-left:20px;
+    }
+  </style>
+</head>
+
+<body>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="view transcation" class="form"> View transcations and a summary within a data
+      range</label><br><br>
+    <label for="start-date" class="form">Enter the start date (dd-mm-yyyy):</label><br>
+    <input type="date" name="start"><br><br>
+
+    <label for="end-date" class="form">Enter the end date (dd-mm-yyyy):</label><br>
+    <input type="date" name="end"><br><br>
+
+    <input type="submit" style="margin-left:20px;" name="search">
+    <div style="border:2px;"></a>
+      <br>
+      <a id="d" href="{% url 'home:all_data' %}">all_data</a>
+    </div>
+    <br>
+    <a id="k" href="{% url 'home:table' %}">range_data</a>
+    <div class="main">
+  </form>
+  
+</body>
+
+</html>

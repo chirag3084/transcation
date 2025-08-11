@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 150px;
+    }
+
+    #box {
+      width: 250px;
+      background-color: blue;
+      margin-left: 600px;
+    }
+
+    #signup {
+      padding-left: 50px;
+      padding-bottom: 20px;
+    }
+
+    #btn {
+      background-color: blueviolet;
+      font-size: large;
+      border-radius: 2px;
+      text-align: center;
+      text-decoration: dotted;
+    }
+
+    btn1 {
+      padding-top: 100px;
+    }
+
+    .data {
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="box">
+    <div id="form">
+      <form method="POST">
+        {% csrf_token %}
+        <h3 id="signup" style="color: bisque;" name="signup">Signup</h3>
+        {% for message in messages %}
+        <h3> {{message}}</h3>
+        {% endfor %}
+        <label for="first name" class="data">First Name</label><br>
+        <required>
+          <input type="text" name="first_name" required><br>
+          <label for="last name" class="data">Last Name</label><br>
+          <input type="text" name="last_name" required><br>
+          <label for="username" class="data">Username</label><br>
+          <input type="text" name="username" required><br>
+          <label for="Email" class="data">Email</label><br>
+          <input type="email" name="email" required><br>
+          <label for="password" class="data">Password</label><br>
+          <input type="password" name="password" required><br>
+          <label for="confirm password" class="data">Confirm Password</label><br>
+          <input type="password" name="confirm_password" required><br>
+          <div id="btn1" style="padding-top: 10px;padding-left: 30px;padding-bottom: 10px;">
+
+          </div>
+          <button type="submit" id="btn" style="margin-left: 30px;">Register</button>
+          <h6 style="color: bisque;padding-left: 50px;padding-top: 6px;padding-bottom: 20px;">already registered ?<a
+              style="color:white;padding-left: 2px;text-decoration: dashed; " href="{% url 'home:login' %}">login</a>
+      </form>
+      </h6>
+    </div>
+  </div>
+  </div>
+
+</html>

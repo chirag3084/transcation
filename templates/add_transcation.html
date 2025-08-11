@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="margin-left:50px;">
+    <form method="POST">
+        {% csrf_token %}
+        <br>
+        <div>
+            <label for="Add transcation" class="form">Add a new transcation</label><br><br>
+            <label for="(dd-mm-yyyy)" class="form">Enter the date of the transcation (dd-mm-yyyy)</label><br>
+            <input type="date" name="date_t" required><br>
+            <label for="amount" class="form">Enter the amount:</label><br>
+            <input type="number" name="amount_t" required><br>
+            <label for="Income_or_Expense" class="form">Enter the category('I' for Income or 'E' for
+                Expense):</label><br>
+            <input type="text" name="category_t" required><br>
+            <label for="description" class="form">Enter a description (optional):</label><br>
+            <input type="text" name="description_t"><br>
+            <br>
+            <input type="submit" style="margin-left:30px;" name="btn_t"><br><br>
+        </div>
+</body>
+
+</html>
