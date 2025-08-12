@@ -99,27 +99,19 @@ DATABASES = {
 }
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": os.environ.get("NAME"),
-#         "USER":os.environ.get("USER"),
-#         "PASSWORD":os.environ.get("PASSWORD","npg_AnhbepFi9E6a"),
-#         "HOST": os.environ.get("HOST"),
-#         "PORT": os.environ.get("PORT"),
-#     }
-# }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "neondb",
-#         "USER": "neondb_owner",
-#         "PASSWORD": "npg_AnhbepFi9E6a",
-#         "HOST": "ep-steep-tooth-a14t38t0-pooler.ap-southeast-1.aws.neon.tech",
-#         "PORT": "5432",
-#     }
-# }
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
+    }
+}
 
 
 
