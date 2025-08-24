@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-import psycopg2
+
 
 import os
 from dotenv import load_dotenv
@@ -91,35 +91,26 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "test",
+        "USER": "root",
+        "PASSWORD": "chirag",
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
-
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": os.environ.get("NAME"),
-#         "USER":os.environ.get("USER"),
-#         "PASSWORD":os.environ.get("PASSWORD","npg_AnhbepFi9E6a"),
-#         "HOST": os.environ.get("HOST"),
-#         "PORT": os.environ.get("PORT"),
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "neondb",
-#         "USER": "neondb_owner",
-#         "PASSWORD": "npg_AnhbepFi9E6a",
-#         "HOST": "ep-steep-tooth-a14t38t0-pooler.ap-southeast-1.aws.neon.tech",
-#         "PORT": "5432",
-#     }
-# }
 
 
 

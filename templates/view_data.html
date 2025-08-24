@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>table</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      /* This is key for clean borders */
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .main {
+      padding: 20px;
+      padding-left: 33vw;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th><b>date_t</th></b>
+      <th><b>amount_t</th></b>
+    </tr>
+    {% for t in d %}
+    <td>{{t.date_t}}</td>
+    <td>{{t.amount_t}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+</body>
+
+</html>

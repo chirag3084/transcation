@@ -7,8 +7,7 @@ from .views import TranscationViewSet
 router = DefaultRouter()
 router.register("transcations", TranscationViewSet)
 
-# Registering the app's namespace
-app_name = "home"
+
 
 
 urlpatterns = [
@@ -59,4 +58,6 @@ urlpatterns = [
     ),
     path("api/v1/", include(router.urls)),
     path("plot_transactions/", views.plot_transactions, name="plot_transactions"),
+    path("view_data/", views.view_data, name="view_data"),
+    path("your/", views.your, name="your"),
 ]
