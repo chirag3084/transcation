@@ -113,6 +113,24 @@ DATABASES = {
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
+    }
+}
+
+
+>>>>>>> a4456cf191963eb6ba45bf42bf888714a93df023
 
 
 # Password validation
