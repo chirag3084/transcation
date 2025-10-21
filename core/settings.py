@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
-import psycopg2
+
 
 import os
 from dotenv import load_dotenv
@@ -91,14 +91,30 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "test",
+        "USER": "root",
+        "PASSWORD": "chirag",
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -114,6 +130,7 @@ DATABASES = {
 }
 
 
+>>>>>>> a4456cf191963eb6ba45bf42bf888714a93df023
 
 
 # Password validation
