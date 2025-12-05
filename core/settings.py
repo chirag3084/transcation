@@ -113,10 +113,6 @@ DATABASES = {
 }
 
 
-<<<<<<< HEAD
-=======
-
-
 
 DATABASES = {
     "default": {
@@ -130,7 +126,7 @@ DATABASES = {
 }
 
 
->>>>>>> a4456cf191963eb6ba45bf42bf888714a93df023
+
 
 
 # Password validation
