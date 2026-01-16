@@ -63,6 +63,8 @@ A comprehensive web application built with Django for managing financial transac
    git clone https://github.com/chirag3084/transcation.git
    cd transcation
    ```
+   
+   **Note:** The repository name "transcation" is intentional (as per the original project naming).
 
 2. **Create a virtual environment**
    ```bash
@@ -122,9 +124,11 @@ Access the application at `http://localhost:8000`
 
 **FastAPI Server:**
 ```bash
-uvicorn home.api_fastapi:app --reload
+uvicorn home.api_fastapi:app --reload --port 8001
 ```
-Access FastAPI at `http://localhost:8000`
+Access FastAPI at `http://localhost:8001`
+
+**Note:** Run only one server at a time, or use different ports to avoid conflicts.
 
 ### Accessing the Application
 
