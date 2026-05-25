@@ -30,6 +30,8 @@ A comprehensive web application built with Django for managing financial transac
   - CSV file generation support
   - Programmatic data access
 
+
+
 ## 🛠️ Tech Stack
 
 ### Backend
@@ -128,7 +130,7 @@ uvicorn home.api_fastapi:app --reload --port 8001
 ```
 Access FastAPI at `http://localhost:8001`
 
-**Note:** Run only one server at a time, or use different ports to avoid conflicts.
+**Note:** Run server different port for both Django and FastAPI to avoid conflicts.
 
 ### Accessing the Application
 
