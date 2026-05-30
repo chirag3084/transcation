@@ -15,6 +15,7 @@ A comprehensive web application built with Django for managing financial transac
   - Filter transactions by date range
   - Export transaction data as JSON
   - add data
+  - crud
 
 - **Data Visualization**
   - Interactive transaction graphs using Plotly
