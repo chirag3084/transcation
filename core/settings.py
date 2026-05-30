@@ -164,7 +164,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # URL to access static files in templates
-STATIC_URL = "/static/"
+STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = "dashboard.html/"
 
 
@@ -175,6 +175,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build" "staticfiles")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    
+    STATICFILES_DIRS = [
+    BASE_DIR / "static", 
+]
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # Find templates in the same folder as settings.py.
