@@ -24,7 +24,6 @@ A comprehensive web application built with Django for managing financial transac
 
 - **REST API**
   - RESTful API endpoints using Django REST Framework
-  - FastAPI integration for additional endpoints
   - JSON export capabilities
 
 - **Data Export**
@@ -39,7 +38,6 @@ A comprehensive web application built with Django for managing financial transac
 ### Backend
 - **Django 5.1** - Main web framework
 - **Django REST Framework 3.16.0** - REST API
-- **FastAPI 0.115.6** - Alternative API framework
 - **PostgreSQL** - Primary database (MySQL and SQLite support available)
 
 ### Data Processing & Visualization
@@ -126,13 +124,9 @@ python manage.py runserver
 ```
 Access the application at `http://localhost:8000`
 
-**FastAPI Server:**
-```bash
-uvicorn home.api_fastapi:app --reload --port 8001
-```
-Access FastAPI at `http://localhost:8001`
 
-**Note:** Run server different port for both Django and FastAPI to avoid conflicts.
+
+
 
 ### Accessing the Application
 
@@ -157,9 +151,7 @@ Access FastAPI at `http://localhost:8001`
 - **Export all data as JSON:** `GET /export-json/`
 - **Export data by ID:** `GET /export-json/{id}/`
 
-### FastAPI Endpoints
 
-- **Root endpoint:** `GET /`
 
 ## 💾 Database Configuration
 
@@ -216,7 +208,7 @@ transcation/
 │   ├── views.py       # View functions
 │   ├── urls.py        # App URL patterns
 │   ├── serializers.py # DRF serializers
-│   └── api_fastapi.py # FastAPI endpoints
+│ 
 ├── templates/         # HTML templates
 ├── staticfiles_build/ # Static files for production
 ├── manage.py          # Django management script
@@ -250,5 +242,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - Django Documentation
 - Django REST Framework
-- FastAPI Documentation
 - Plotly for visualization capabilities

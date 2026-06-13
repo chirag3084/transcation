@@ -14,7 +14,6 @@ import base64
 from home.views import *
 import matplotlib.pyplot as plt
 
-
 # from datetime import date, datetime
 import os
 import threading
@@ -26,9 +25,10 @@ import datetime
 
 
 def your(request):
-    now=datetime.datetime.now()
-    print("Date: "+ now.strftime("%Y-%m-%d"))
-    return render(request,"your.html")
+    now = datetime.datetime.now()
+    print("Date: " + now.strftime("%Y-%m-%d"))
+    return render(request, "your.html")
+
 
 def export_data_as_json(request):
     data = list(Transcation.objects.values())
@@ -76,7 +76,6 @@ def delete_file_after_delay(file_path, delay_seconds=300):
     thread.start()
 
 
-
 import plotly.express as px
 import pandas as pd
 import numpy as np
@@ -84,47 +83,38 @@ import pandas as pd
 import csv
 from . import *
 
+
 def plot_transactions(request):
     # Sample data
 
-
-
-# Data
-    df = pd.read_csv('p.csv')
-    fig = px.line(df, x="date_t", y="amount_t", color="date_t", line_group="date_t", hover_name="amount_t",
-            line_shape="spline", render_mode="svg")
+    # Data
+    df = pd.read_csv("p.csv")
+    fig = px.line(
+        df,
+        x="date_t",
+        y="amount_t",
+        color="date_t",
+        line_group="date_t",
+        hover_name="amount_t",
+        line_shape="spline",
+        render_mode="svg",
+    )
     fig.show()
-    
-      # Important: close the figure to free memo
-    return render(request,"plot_transactions.html")
-   
-    
-    
-    
-    
-    
-        
-        
 
-    
-    data = {'Date': pd.to_date(['2023-01-01', '2023-01-02', '2023-01-03']),
-            'Value': [10, 12, 8]}
+    # Important: close the figure to free memo
+    return render(request, "plot_transactions.html")
+
+    data = {
+        "Date": pd.to_date(["2023-01-01", "2023-01-02", "2023-01-03"]),
+        "Value": [10, 12, 8],
+    }
     df = pd.DataFrame(data)
 
-    fig = px.line(df, x='Date', y='Value', title='Time Series Example')
+    fig = px.line(df, x="Date", y="Value", title="Time Series Example")
     fig.show()
-   
-    
-    
-    
+
 
 def view_data(request):
-
-       
-            
-            
-            
-        
 
     # search = []  # Initialize search results
 
@@ -244,7 +234,7 @@ def add_transcation(request):
         )
 
         export_data_as_text(request)
-        return redirect("/add_transcation/")
+        return redirect("/dashboard/")
 
     return render(request, "add_transcation.html")
 
