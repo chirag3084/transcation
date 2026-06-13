@@ -18,6 +18,10 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
+import os
+from urllib.parse import urlparse, parse_qsl
+
 # Add these at the top of your settings.py
 
 
@@ -126,11 +130,7 @@ DATABASES = {
 # }
 
 # Add these at the top of your settings.py
-import os
-from dotenv import load_dotenv
-from urllib.parse import urlparse, parse_qsl
 
-load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
@@ -193,12 +193,14 @@ LOGIN_REDIRECT_URL = "dashboard.html/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-if not DEBUG:
-    STATIC_ROOT = BASE_DIR / "staticfiles"
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    
-    STATICFILES_DIRS = [
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+STATICFILES_DIRS = [
     BASE_DIR / "static", 
 ]
 
