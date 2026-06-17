@@ -103,8 +103,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 # }
 
 
-
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -115,7 +113,6 @@ DATABASES = {
         "PORT": "3306",
     }
 }
-
 
 
 # DATABASES = {
@@ -136,19 +133,16 @@ DATABASES = {
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
-        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": tmpPostgres.path.decode("utf-8").replace("/", ""),
+        "USER": tmpPostgres.username,
+        "PASSWORD": tmpPostgres.password,
+        "HOST": tmpPostgres.hostname,
+        "PORT": 5432,
+        "OPTIONS": dict(parse_qsl(tmpPostgres.query)),
     }
 }
-
-
-
 
 
 # Password validation
@@ -186,7 +180,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # URL to access static files in templates
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 LOGIN_REDIRECT_URL = "dashboard.html/"
 
 
@@ -201,7 +195,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static", 
+    BASE_DIR / "static",
 ]
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
