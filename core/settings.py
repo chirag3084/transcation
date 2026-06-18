@@ -129,8 +129,23 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Add these at the top of your settings.py
 
 
+
+import os
+import dj_database_url
+
+# It's best practice to pull the connection string from an environment variable
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+DATABASES = {
+    "default": dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,         # Keeps connections alive for 10 minutes
+        conn_health_checks=True,   # Crucial for Neon! Checks if an idle connection is alive before using it
+    )
+}
+
 # Replace the DATABASES section of your settings.py with this
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 # DATABASES = {
 #     "default": {
