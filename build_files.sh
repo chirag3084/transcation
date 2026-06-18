@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Ensure pip is installed/updated and install dependencies
-python3 -m pip install -r requirements.txt
+# Force pip to install packages globally in the build container
+python3 -m pip install -r requirements.txt --break-system-packages
 
-# Run collectstatic to dump files into staticfiles_build
+# Run collectstatic
 python3 manage.py collectstatic --noinput --clear
