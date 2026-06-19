@@ -287,7 +287,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Constants from your JSONBin.io dashboard
-JSONBIN_API_KEY = OS.environ.get("JSONBIN_API_KEY")  # Replace with your Master Key
+JSONBIN_API_KEY = os.environ.get("JSONBIN_API_KEY")  # Replace with your Master Key
 # Optional: Include if you want to group bins under a specific collection
 COLLECTION_ID = "YourCollectionID" 
 
