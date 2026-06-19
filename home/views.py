@@ -278,3 +278,55 @@ def home(request):
 
 def password_reset_confirm(request):
     return render(request, "password_reset_confirm.html")
+
+
+
+import json
+import requests
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+# Constants from your JSONBin.io dashboard
+JSONBIN_API_KEY = OS.environ.get("JSONBIN_API_KEY")  # Replace with your Master Key
+# Optional: Include if you want to group bins under a specific collection
+COLLECTION_ID = "YourCollectionID" 
+
+@csrf_exempt
+def send_data_to_jsonbin(request):
+    # 1. Prepare your Django data structure (e.g., dictionary)
+    my_django_data = {
+        "app": "Django Transcation",
+        "status": "active",
+        "metrics": {
+            "total_users": 1050,
+            "server_health": "good"
+        }
+    }
+    
+    # 2. Serialize data into a JSON string using json.dumps()
+    # Note: Use json.dumps() to format your payload as a string
+    serialized_payload = json.dumps(my_django_data)
+    
+    # 3. Configure the HTTP headers required by JSONBin.io
+    headers = {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_API_KEY,
+        # 'X-Collection-Id': COLLECTION_ID  # Uncomment if saving to a specific collection
+    }
+    
+    # 4. Push data to create a new "Bin"
+    endpoint_url = "https://jsonbin.io"
+    
+    try:
+        response = requests.post(endpoint_url, data=serialized_payload, headers=headers)
+        response_data = response.json()
+        
+        if response.status_code == 200:
+            # Successfully saved! JSONBin returns a unique 'id' for the bin
+            bin_id = response_data['metadata']['id']
+            return JsonResponse({"status": "success", "bin_id": bin_id, "data": response_data})
+        else:
+            return JsonResponse({"status": "failed", "error": response_data}, status=response.status_code)
+            
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
