@@ -315,7 +315,7 @@ def send_data_to_jsonbin(request):
     }
     
     # 4. Push data to create a new "Bin"
-    endpoint_url = "https://jsonbin.io"
+    endpoint_url = "https://jsonbin.io/transcation"
     
     try:
         response = requests.post(endpoint_url, data=serialized_payload, headers=headers)
