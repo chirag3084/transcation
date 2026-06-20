@@ -51,12 +51,12 @@ class TranscationViewSet(viewsets.ModelViewSet):
     serializer_class = TranscationSerializer
 
 
-def export_data_as_text(request):
-    data = list(Transcation.objects.values())
-    with open("data.json", "w") as file:
-        json.dump(data, file, default=str)
+# def export_data_as_text(request):
+#     data = list(Transcation.objects.values())
+#     with open("data.json", "w") as file:
+#         json.dump(data, file, default=str)
 
-    return JsonResponse({"message": "ok"})
+#     return JsonResponse({"message": "ok"})
 
 
 def delete_file_after_delay(file_path, delay_seconds=300):
@@ -233,7 +233,9 @@ def add_transcation(request):
             description_t=description_t,
         )
 
-        export_data_as_text(request)
+        # export_data_as_text(request)
+        send_data_to_jsonbin(request)
+        
         return redirect("/dashboard/")
 
     return render(request, "add_transcation.html")
