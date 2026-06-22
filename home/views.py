@@ -11,16 +11,12 @@ from django.http import JsonResponse
 import json
 import io
 import base64
-from home.views import *
-import matplotlib.pyplot as plt
-
-# from datetime import date, datetime
+from home.views import *# from datetime import date, datetime
 import os
 import threading
 import time
 from django.contrib.auth import views as auth_views
 from rest_framework import viewsets
-from .serializers import TranscationSerializer
 import datetime
 
 
