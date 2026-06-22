@@ -41,9 +41,7 @@ def export_data_as_json_by_id(request, id):
     return JsonResponse(data, safe=False)
 
 
-class TranscationViewSet(viewsets.ModelViewSet):
-    queryset = Transcation.objects.all()
-    serializer_class = TranscationSerializer
+
 
 
 # def export_data_as_text(request):
