@@ -16,7 +16,6 @@ import os
 import threading
 import time
 from django.contrib.auth import views as auth_views
-from rest_framework import viewsets
 import datetime
 
 
