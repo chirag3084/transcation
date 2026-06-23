@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Force pip to install packages globally in the build container
-python3 -m pip install -r requirements.txt --break-system-packages
+echo "=== BUILD START ==="
 
-# Run collectstatic
+# Install requirements safely into the local container environment
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+
+# Run Django collectstatic
 python3 manage.py collectstatic --noinput --clear
+
+echo "=== BUILD END ==="
