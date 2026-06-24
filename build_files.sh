@@ -4,7 +4,8 @@ echo "=== BUILD START ==="
 
 # Install requirements safely into the local container environment
 python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+pip install -r requirements.txt --break-system-packages
+
 
 # Run Django collectstatic
 python3 manage.py collectstatic --noinput --clear
