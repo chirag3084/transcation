@@ -56,7 +56,6 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     "home",
     "core",
-    "rest_framework",
 ]
 INSTALLED_APPS += EXTERNAL_APPS
 MIDDLEWARE = [
