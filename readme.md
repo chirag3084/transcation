@@ -236,5 +236,4 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙏 Acknowledgments
 
 - Django Documentation
-- Django REST Framework
 - Plotly for visualization capabilities
