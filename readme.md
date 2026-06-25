@@ -22,10 +22,6 @@ A comprehensive web application built with Django for managing financial transac
   - Line charts for transaction analysis
   - Visual representation of spending patterns
 
-- **REST API**
-  - RESTful API endpoints using Django REST Framework
-  - JSON export capabilities
-
 - **Data Export**
   - Export transactions as JSON
   - CSV file generation support
