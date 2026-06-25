@@ -33,7 +33,6 @@ A comprehensive web application built with Django for managing financial transac
 
 ### Backend
 - **Django 5.1** - Main web framework
-- **Django REST Framework 3.16.0** - REST API
 - **PostgreSQL** - Primary database (MySQL and SQLite support available)
 
 ### Data Processing & Visualization
