@@ -202,7 +202,7 @@ transcation/
 │   ├── models.py      # Database models
 │   ├── views.py       # View functions
 │   ├── urls.py        # App URL patterns
-│   ├── serializers.py # DRF serializers
+│   
 │ 
 ├── templates/         # HTML templates
 ├── staticfiles_build/ # Static files for production
