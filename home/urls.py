@@ -17,7 +17,7 @@ urlpatterns = [
         name="export_data_as_json_by_id",
     ),
     # path("load_json_data/", views.load_json_data, name="load_json_data"),
-    path("export_data_as_text/", views.export_data_as_text, name="export_data_as_text"),
+    #path("export_data_as_text/", views.export_data_as_text, name="export_data_as_text"),
     path("all_data/", views.all_data, name="all_data"),
     path("table/", views.table, name="table"),
     path(
