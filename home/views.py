@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 import datetime
 from dotenv import load_dotenv
 load_dotenv()
+from .utils import send_data_to_jsonbin  # Adjust path to match your project structure
 
 
 
