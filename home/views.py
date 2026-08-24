@@ -17,6 +17,9 @@ import threading
 import time
 from django.contrib.auth import views as auth_views
 import datetime
+from dotenv import load_dotenv
+load_dotenv()
+
 
 
 def your(request):
@@ -114,6 +117,17 @@ def view_data(request):
     return render(request, "view_data.html")
 
 
+import json
+import requests
+from django.conf import settings
+from django.http import JsonResponse
+from django.shortcuts import render
+
+# JSONBin v3 configurations (ideally stored in settings.py / .env)
+JSONBIN_API_URL = os.environ.get("JSONBIN_API_URL")
+JSONBIN_API_KEY = os.environ.get("JSONBIN_API_KEY")
+
+
 def view_transcation(request):
     if request.method == "POST":
         form = request.POST
@@ -126,48 +140,116 @@ def view_transcation(request):
             )
 
         try:
-            d = list(Transcation.objects.filter(date_t__range=[start, end]).values())
+            # Query and serialize data
+            transactions = list(
+                Transcation.objects.filter(date_t__range=[start, end]).values()
+            )
 
-            with open("d.json", "w") as file:
-                json.dump(d, file, default=str, indent=2)
+            # JSONBin requires standard serializable data (handles Date/Decimal types)
+            payload = json.loads(json.dumps(transactions, default=str))
+
+            # Send data to JSONBin.io
+            headers = {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_API_KEY,
+                "X-Bin-Name": f"Transactions_{start}_to_{end}",
+                "X-Bin-Private": "false",  # Set to "false" if you want public access
+            }
+
+            response = requests.post(
+                JSONBIN_API_URL, json=payload, headers=headers, timeout=10
+            )
+            response.raise_for_status()
+            bin_data = response.json()
 
             table(request)
 
-            return JsonResponse({"message": "ok", "count": len(d)})
+            return JsonResponse(
+                {
+                    "message": "ok",
+                    "count": len(transactions),
+                }
+            )
 
+        except requests.RequestException as req_err:
+            return JsonResponse(
+                {"error": f"JSONBin upload failed: {str(req_err)}"}, status=502
+            )
         except Exception as e:
-            print(f"Error: {e}")
             return JsonResponse({"error": str(e)}, status=500)
 
     return render(request, "view_transcations.html")
 
 
+import requests
+from django.conf import settings
+from django.shortcuts import render
+
+# JSONBin v3 configurations
+JSONBIN_API_URL = os.environ.get("JSONBIN_API_URL")
+JSONBIN_API_KEY = os.environ.get("JSONBIN_API_KEY")
+# Set a fallback/default BIN_ID if you are updating a single persistent bin
+DEFAULT_BIN_ID = os.environ.get("DEFAULT_BIN_ID")
+
+
 def table(request):
-    json_file_path = "D:/django_code/core/d.json"
+    # Retrieve bin_id from query params (e.g. /table/?bin_id=xxx), session, or default
+    bin_id = request.GET.get("bin_id") or DEFAULT_BIN_ID
+
+    headers = {
+        "X-Master-Key": JSONBIN_API_KEY,
+    }
+
     try:
-        with open(json_file_path, "r") as file:
-            d = json.load(file)
-            print(d)
-            delete_file_after_delay(json_file_path, 60)
-    except FileNotFoundError:
-        d = {}
+        # JSONBin v3 endpoint to read latest version of a bin
+        url = f"{JSONBIN_API_URL}/{bin_id}/latest"
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+
+        # In JSONBin v3, stored payload is under the 'record' key
+        bin_data = response.json()
+        d = bin_data.get("record", [])
+
+    except requests.RequestException as e:
+        print(f"JSONBin fetch error: {e}")
+        d = []
+    except Exception as e:
+        print(f"Error: {e}")
+        d = []
 
     return render(request, "table.html", {"d": d})
 
 
+import requests
+from django.conf import settings
+from django.shortcuts import render
+
+# JSONBin v3 configurations
+JSONBIN_API_URL = os.environ.get("JSONBIN_API_URL")
+JSONBIN_API_KEY = os.environ.get("JSONBIN_API_KEY")
+DATA_BIN_ID = os.environ.get("DEFAULT_BIN_ID")
+
+
+import requests
+from django.conf import settings
+from django.shortcuts import render
+
+
 def all_data(request):
-    json_file = "D:/django_code/core/data.json"
+    headers = {"X-Master-Key": os.environ.get("JSONBIN_API_KEY")}
+    url = f"https://api.jsonbin.io/v3/b/{DEFAULT_BIN_ID}/latest"
+    print(DEFAULT_BIN_ID)
 
     try:
-        with open(json_file, "r") as file:
-            data = json.load(file)
-    except FileNotFoundError:
-        data = {}
-
-    # search = []  # Initialize search results
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        # Extracts the array from JSONBin's wrapper
+        data = response.json().get("record", [])
+    except Exception as e:
+        print(f"Error: {e}")
+        data = []
 
     return render(request, "all_data.html", {"data": data})
-
 
 def register(request):
     if request.method == "POST":
@@ -275,53 +357,4 @@ def password_reset_confirm(request):
     return render(request, "password_reset_confirm.html")
 
 
-
-import json
-import requests
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-
-# Constants from your JSONBin.io dashboard
-JSONBIN_API_KEY = os.environ.get("JSONBIN_API_KEY")  # Replace with your Master Key
-# Optional: Include if you want to group bins under a specific collection
-COLLECTION_ID = "YourCollectionID" 
-
-@csrf_exempt
-def send_data_to_jsonbin(request):
-    # 1. Prepare your Django data structure (e.g., dictionary)
-    my_django_data = {
-        "app": "Django Transcation",
-        "status": "active",
-        "metrics": {
-            "total_users": 1050,
-            "server_health": "good"
-        }
-    }
-    
-    # 2. Serialize data into a JSON string using json.dumps()
-    # Note: Use json.dumps() to format your payload as a string
-    serialized_payload = json.dumps(my_django_data)
-    
-    # 3. Configure the HTTP headers required by JSONBin.io
-    headers = {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY,
-        # 'X-Collection-Id': COLLECTION_ID  # Uncomment if saving to a specific collection
-    }
-    
-    # 4. Push data to create a new "Bin"
-    endpoint_url = "https://jsonbin.io/transcation"
-    
-    try:
-        response = requests.post(endpoint_url, data=serialized_payload, headers=headers)
-        response_data = response.json()
-        
-        if response.status_code == 200:
-            # Successfully saved! JSONBin returns a unique 'id' for the bin
-            bin_id = response_data['metadata']['id']
-            return JsonResponse({"status": "success", "bin_id": bin_id, "data": response_data})
-        else:
-            return JsonResponse({"status": "failed", "error": response_data}, status=response.status_code)
-            
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+  

@@ -2,66 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add_table</title>
+    <title>Transaction Records</title>
     <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      /* This is key for clean borders */
-      margin-top: 20px;
-    }
-
-    th,
-    td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-
-    .main {
-      padding: 20px;
-      padding-left: 33vw;
-    }
-  </style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        tr:nth-child(even) { background-color: #fafafa; }
+    </style>
 </head>
 <body>
 
-    <table>
+    <h2>Data Table</h2>
 
-        <tr>
-          <th><b>id</th></b>
-          <th><b>date_t</th></b>
-          <th><b>amount_t</th></b>
-          <th><b>category_t</th></b>
-          <th><b>description_t</th></b>
-        </tr>
-        {% for t in data %}
-        <td>{{t.id}}</td>
-        <td>{{t.date_t}}</td>
-        <td>{{t.amount_t}}</td>
-        <td>{{t.category_t}}</td>
-        <td>{{t.description_t}}</td>
-        </tr>
-        {% endfor %}
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.date_t }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No records found or failed to load data.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 </body>
 </html>
-
-
-
-
-
-
